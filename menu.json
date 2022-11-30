@@ -1,22 +1,22 @@
 {   "Dania": [
     {
         "nazwa": "Zajebisty kotlet",
-        "cena": 19.99,
+        "cena": 19,
         "skladniki": "kotlet, w dodatku zajebisty, może być z frytkami"
     },
     {
         "nazwa": "Chujowy kotlet",
-        "cena": 29.99,
+        "cena": 29,
         "skladniki": "kotlet, w dodatku chujowy, bez frytek"
     },
     {
         "nazwa": "Kanapka",
-        "cena": 15.00,
+        "cena": 15,
         "skladniki": "bulka, ogorek, do wyboru kotlet: chujowy albo zajebisty"
     },
     {
         "nazwa": "Wczorajszy bigos",
-        "cena": 150.00,
+        "cena": 150,
         "skladniki": "kotlet(chujowy i zajebisty), bulka, ogorek zmielone do postaci proszku. wszystko tygodniowe. nazwa wczorajszy dla zmylki"
     }
 ]}
