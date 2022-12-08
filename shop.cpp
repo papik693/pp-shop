@@ -194,9 +194,8 @@ void kompletowanie_zamowienia() {
         default:
             cout << "Nie ma takiej pozycji. Wybierz inny numer" << endl;
             break;
-}   
+        }   
     }
-
 }
 
 void podsumowanie_zamowienia()
