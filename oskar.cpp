@@ -65,11 +65,11 @@ int main()
     cin >> imie;
     imie[0] = toupper(imie[0]);
     cout << "Witaj " << imie << endl;
-    cout << "Danie jesz na miejscu czy na wynos?" << endl;
+    cout << "Danie jesz na miejscu czy dostawa?" << endl;
 
     while (condition != 1)
     {
-        cout << "Wpisz 1. Jesli na miejscu, 2.Jezeli na wynos." << endl;
+        cout << "Wpisz 1. Jesli na miejscu, 2.Jezeli dostawa." << endl;
         cin >> formaDostarczenia;
         switch (formaDostarczenia)
         {
