@@ -1,4 +1,5 @@
-{   "Dania": [
+{   
+    "Dania": [
     {
         "nazwa": "Zajebisty kotlet",
         "cena": 19,
@@ -12,7 +13,7 @@
     {
         "nazwa": "Kanapka",
         "cena": 15,
-        "skladniki": "bulka, ogorek, do wyboru kotlet: chujowy albo zajebisty"
+        "skladniki": "bulka, ogorek, losowy kotlet: chujowy albo zajebisty"
     },
     {
         "nazwa": "Wczorajszy bigos",
