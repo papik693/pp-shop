@@ -9,7 +9,7 @@ using json = nlohmann::json;
 using namespace std;
 
 int wartosc_zamowienia=0;
-int wybor_w_menu=1, ilosc_porcji, numer_do_usuniecia;
+int wybor_w_menu=1, ilosc_porcji, numer_do_usuniecia, wybor_podsumowania;
 int numerStolika;
 string miastoDostawy;
 string ulicaDostawy;
@@ -156,7 +156,6 @@ void dodaj_do_zamowienia(int wybor_w_menu){
     }
 }
 
-
 void kompletowanie_zamowienia() {
     while (wybor_w_menu != 0){
         wyswietl_menu(menu);
@@ -203,32 +202,48 @@ void kompletowanie_zamowienia() {
 void podsumowanie_zamowienia()
 {
     int cena = 0;
-
     cout << "*** PODSUMOWANIE ***" << endl;
-    wyswietl_zamowienie();
-    ofstream rachunek;
-    rachunek.open("rachunek.txt");
-
-    rachunek << "RACHUNEK ZA ZAMÓWIENIE\n";
-
-    int j = 0;
-    for (auto i : zamowienie["Zamowienie"]){
-        rachunek << j+1 << ". " << i["nazwa"].get<string>() << ", cena: " << i["cena"] << " zł\n";
-        cena += i["cena"].get<int>();
-        j++;
+    cout << "Podsumowanie zamówienia chcesz zobaczyć na ekranie czy zapisać je do pliku? 1-ekran 2-plik" << endl;
+    cin >> wybor_podsumowania;
+    if (wybor_podsumowania == 1)
+    {
+        cout << "RACHUNEK ZA ZAMÓWIENIE\n";
+        wyswietl_zamowienie();
+        if (formaDostarczenia == 2){
+            cout << "Zamowienie dla: " << imie << endl;
+            cout << "Godzina dostawy: " << godzinaDostawy << ":00" << endl;
+            cout << "Miasto: " << miastoDostawy << endl;
+            cout << "Ulica: " << ulicaDostawy << endl;
+            cout << "Numer mieszkania: " << numerMieszkaniaDostawy << endl;
+        }
     }
-    rachunek << "Całkowita kwota zamówienia: " << cena << " zł" << endl;
-    if (formaDostarczenia == 2){
-        cout << "Godzina dostawy: " << godzinaDostawy << ":00" << endl;
-        rachunek << "Godzina dostawy: " << godzinaDostawy << ":00" << endl;
-        cout << "Miasto: " << miastoDostawy << endl;
-        rachunek << "Miasto: " << miastoDostawy << endl;
-        cout << "Ulica: " << ulicaDostawy << endl;
-        rachunek << "Ulica: " << ulicaDostawy << endl;
-        cout << "Numer mieszkania: " << numerMieszkaniaDostawy << endl;
-        rachunek << "Numer mieszkania: " << numerMieszkaniaDostawy << endl;
+    else if (wybor_podsumowania == 2)
+    {
+        ofstream rachunek;
+        rachunek.open("rachunek.txt");
+
+        rachunek << "RACHUNEK ZA ZAMÓWIENIE\n";
+        int j = 0;
+        for (auto i : zamowienie["Zamowienie"]){
+            rachunek << j+1 << ". " << i["nazwa"].get<string>() << ", cena: " << i["cena"] << " zł\n";
+            cena += i["cena"].get<int>();
+            j++;
+        }
+        rachunek << "Całkowita kwota zamówienia: " << cena << " zł" << endl;
+        if (formaDostarczenia == 2){
+            rachunek << "Zamowienie dla: " << imie << endl;
+            rachunek << "Godzina dostawy: " << godzinaDostawy << ":00" << endl;
+            rachunek << "Miasto: " << miastoDostawy << endl;
+            rachunek << "Ulica: " << ulicaDostawy << endl;
+            rachunek << "Numer mieszkania: " << numerMieszkaniaDostawy << endl;
+        }
+        rachunek.close();
     }
-    rachunek.close();
+    else
+    {
+        cout <<"Zły wybór..." << endl;
+        podsumowanie_zamowienia();
+    }
     getch();
     cout << "Naciśnij dowolny klawisz żeby zakończyć działanie programu..." << endl;
 }
