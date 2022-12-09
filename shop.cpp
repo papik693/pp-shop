@@ -3,7 +3,7 @@
 #include <cctype>
 #include <fstream>
 #include <iostream>
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 #include <conio.h>
 using json = nlohmann::json;
 using namespace std;
@@ -139,7 +139,7 @@ void wyswietl_zamowienie(){
         wartosc_zamowienia = wartosc_zamowienia + zamowienie["Zamowienie"][j]["cena"].get<int>();
         j++;
     }
-    cout << "Całkowita wartość zamówienia wynosi: " << wartosc_zamowienia << endl;
+    cout << "Calkowita wartosc zamowienia wynosi: " << wartosc_zamowienia << endl;
 }
 
 void usun_z_zamowienia(int numer_do_usuniecia){
@@ -159,12 +159,12 @@ void dodaj_do_zamowienia(int wybor_w_menu){
 void kompletowanie_zamowienia() {
     while (wybor_w_menu != 0){
         wyswietl_menu(menu);
-        cout << "Które danie wybierasz(numerek)? Chyba że wolisz przejść do podsumowania - wtedy naciśnij 0. Aby wyświetlić zamówienie wciśnij 100 lub aby usunąć pozycję z obecnego zamówienie wciśnij 200" << endl << "Twój wybór: "; 
+        cout << "Ktore danie wybierasz(numerek)? Chyba ze wolisz przejsc do podsumowania - wtedy nacisnij 0. Aby wyswietlic zamowienie wcisnij 100 lub aby usunac pozycje z obecnego zamowienia wcisnij 200" << endl << "Twoj wybor: "; 
         cin >> wybor_w_menu;
         switch (wybor_w_menu)
         {
         case 0:
-            cout << "Wyjście z zamówień" << endl;
+            cout << "Wyjscie z zamowien" << endl;
             break;
         case 1:
             dodaj_do_zamowienia(wybor_w_menu);
@@ -181,13 +181,13 @@ void kompletowanie_zamowienia() {
         case 100:
             cout << "Twoje obecne zamowienie to:" << endl;
             wyswietl_zamowienie();
-            cout << "Czy chcesz przejść do podsumowania? Jeśli tak wciśnij 0, aby wyświetlić menu wybierz dowolną liczbę" << endl << "Twój wybór: ";
+            cout << "Czy chcesz przejsc do podsumowania? Jesli tak wciśnij 0, aby wyświetlic menu wybierz dowolna liczbe" << endl << "Twoj wybor: ";
             cin >> wybor_w_menu;
             break;
         case 200:
             cout << "Twoje obecne zamowienie to:" << endl;
             wyswietl_zamowienie();
-            cout << "Którą pozycję chcesz usunąć?" << endl;
+            cout << "Która pozycje chcesz usunać?" << endl;
             cin >> numer_do_usuniecia;
             usun_z_zamowienia(numer_do_usuniecia);
             break;
@@ -202,11 +202,11 @@ void podsumowanie_zamowienia()
 {
     int cena = 0;
     cout << "*** PODSUMOWANIE ***" << endl;
-    cout << "Podsumowanie zamówienia chcesz zobaczyć na ekranie czy zapisać je do pliku? 1-ekran 2-plik" << endl;
+    cout << "Podsumowanie zamwwienia chcesz zobaczyc na ekranie czy zapisac je do pliku? 1-ekran 2-plik" << endl;
     cin >> wybor_podsumowania;
     if (wybor_podsumowania == 1)
     {
-        cout << "RACHUNEK ZA ZAMÓWIENIE\n";
+        cout << "RACHUNEK ZA ZAMOWIENIE\n";
         wyswietl_zamowienie();
         if (formaDostarczenia == 2){
             cout << "Zamowienie dla: " << imie << endl;
@@ -221,14 +221,14 @@ void podsumowanie_zamowienia()
         ofstream rachunek;
         rachunek.open("rachunek.txt");
 
-        rachunek << "RACHUNEK ZA ZAMÓWIENIE\n";
+        rachunek << "RACHUNEK ZA ZAMOWIENIE\n";
         int j = 0;
         for (auto i : zamowienie["Zamowienie"]){
             rachunek << j+1 << ". " << i["nazwa"].get<string>() << ", cena: " << i["cena"] << " zł\n";
             cena += i["cena"].get<int>();
             j++;
         }
-        rachunek << "Całkowita kwota zamówienia: " << cena << " zł" << endl;
+        rachunek << "Calkowita kwota zamowienia: " << cena << " zł" << endl;
         if (formaDostarczenia == 2){
             rachunek << "Zamowienie dla: " << imie << endl;
             rachunek << "Godzina dostawy: " << godzinaDostawy << ":00" << endl;
@@ -240,17 +240,17 @@ void podsumowanie_zamowienia()
     }
     else
     {
-        cout <<"Zły wybór..." << endl;
+        cout <<"Zly wybor..." << endl;
         podsumowanie_zamowienia();
     }
     getch();
-    cout << "Naciśnij dowolny klawisz żeby zakończyć działanie programu..." << endl;
+    cout << "Nacisnij dowolny klawisz żeby zakonczyc działanie programu..." << endl;
 }
 
 int main()
 {
     przywitanie();
-    cout << "Teraz wybierz coś z karty!" << endl;
+    cout << "Teraz wybierz cos z karty!" << endl;
     kompletowanie_zamowienia();
     podsumowanie_zamowienia();
     getch();
